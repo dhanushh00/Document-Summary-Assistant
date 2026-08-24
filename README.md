@@ -12,10 +12,16 @@
 
 ---
 
-## 📌 Approach Write-Up (Technical Assessment)
+## 🔗 Project Links & Deliverables
 
-> **Architectural & Problem-Solving Approach (under 200 words):**
-> 
+- **Live Application URL**: [Deploy with Vercel](#-deployment-guide-vercel--netlify) *(or your deployed Vercel/Netlify URL)*
+- **GitHub Repository**: [https://github.com/dhanushh00/Document-Summary-Assistant](https://github.com/dhanushh00/Document-Summary-Assistant)
+- **Technical Position**: Software Engineering Technical Assessment Project
+
+---
+
+## 📌 Approach Write-Up (Technical Assessment - Under 200 Words)
+
 > To deliver a responsive, zero-latency document summarization system, the architecture decouples text extraction from AI reasoning. Client-side extraction uses `pdfjs-dist` for layout-aware multi-page PDF parsing and `tesseract.js` web workers for local Optical Character Recognition (OCR) on scanned documents, providing real-time progress callbacks without heavy backend server overhead.
 > 
 > The extracted text feeds into an AI processing pipeline integrated with Google Gemini 1.5/2.0 Flash via structured JSON prompting. The system synthesizes multi-tier summaries (**Short Executive**, **Medium Overview**, **In-Depth Analysis**) with domain-specific focus angles (Executive, Action Items, Technical). Beyond summarization, an automated editorial engine identifies document vulnerabilities (clarity, completeness, legal risk) to generate prioritized improvement recommendations.
@@ -24,7 +30,7 @@
 
 ---
 
-## ✨ Key Features & Requirements Coverage
+## ✨ Key Features & Technical Requirements Coverage
 
 | Assessment Requirement | Implementation Details | Status |
 | :--- | :--- | :---: |
@@ -39,7 +45,7 @@
 | **9. Multi-Format Export** | Instant export to formatted **PDF**, **Markdown (.md)**, print, or copy to clipboard. | ✅ Complete |
 | **10. UI/UX & Responsiveness** | Sleek glassmorphic dark/light UI, responsive across mobile, tablet, and desktop viewports. | ✅ Complete |
 | **11. Pre-loaded Test Data** | 4 realistic sample documents (NDA Contract, Research Paper, Series A Pitch, Scanned Medical OCR). | ✅ Complete |
-| **12. Deployment Ready** | Pre-configured for seamless 1-click hosting on **Vercel** and **Netlify**. | ✅ Complete |
+| **12. Hosting Ready** | Pre-configured for seamless 1-click hosting on **Vercel** and **Netlify**. | ✅ Complete |
 
 ---
 
@@ -56,10 +62,10 @@ flowchart TD
     D --> E
 
     E --> F{AI Intelligence Layer}
-    F -->|Custom Key Configured| G[Google Gemini 1.5/2.0 Flash]
+    F -->|Google Gemini 1.5 Flash| G[Structured JSON AI Engine]
     F -->|Offline / Demo Mode| H[Built-in Intelligent Heuristic Engine]
 
-    G --> I[Structured JSON Output]
+    G --> I[Standardized Intelligence Payload]
     H --> I
 
     I --> J1[Executive & In-Depth Summary]
@@ -85,7 +91,7 @@ flowchart TD
 - **Node.js**: v18.0.0 or higher
 - **npm** or **yarn** or **pnpm**
 
-### Installation
+### Installation Steps
 
 1. **Clone the repository**:
    ```bash
@@ -98,12 +104,11 @@ flowchart TD
    npm install
    ```
 
-3. **Configure Environment (Optional)**:
+3. **Configure Environment Variables (Optional)**:
    Create a `.env` file in the root directory:
    ```env
    VITE_GEMINI_API_KEY=your_google_gemini_api_key_here
    ```
-   > *Note: You can also configure or change the API key directly in the web UI via the "Configure API Key" button in the navigation bar!*
 
 4. **Start the Development Server**:
    ```bash
@@ -118,44 +123,46 @@ flowchart TD
 
 ---
 
-## 🌐 Deployment Guide
+## 🌐 Deployment Guide (Vercel & Netlify)
 
-### Deploy to Vercel
-1. Fork or push this repository to GitHub.
-2. Go to [Vercel](https://vercel.com) and click **"Add New Project"**.
-3. Import this repository.
-4. (Optional) Add `VITE_GEMINI_API_KEY` under Environment Variables.
-5. Click **Deploy**.
+### Deploy to Vercel (Recommended - 2 Minutes)
+1. Go to [Vercel](https://vercel.com) and log in with your GitHub account.
+2. Click **"Add New..."** → **"Project"**.
+3. Select and import **`dhanushh00/Document-Summary-Assistant`**.
+4. (Optional) Under **Environment Variables**, add:
+   - Key: `VITE_GEMINI_API_KEY`
+   - Value: `your_gemini_api_key`
+5. Click **Deploy**. Vercel will build and assign you a live HTTPS URL (e.g., `https://document-summary-assistant.vercel.app`).
 
 ### Deploy to Netlify
-1. Go to [Netlify](https://netlify.com) and connect your GitHub repository.
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Click **Deploy Site**.
+1. Go to [Netlify](https://netlify.com) and connect your GitHub account.
+2. Click **"Add new site"** → **"Import an existing project"**.
+3. Select **`Document-Summary-Assistant`**.
+4. Set Build Command: `npm run build`, Publish Directory: `dist`.
+5. Click **Deploy Site**.
 
 ---
 
-## 🧪 Sample Documents for Instant Evaluation
+## 🧪 Pre-Loaded Sample Documents for Instant Testing
 
 The application includes 4 pre-loaded real-world documents accessible in 1 click from the landing page:
 1. **Mutual Non-Disclosure Agreement (NDA)** - Multi-page legal contract.
-2. **AI Quantization Research Paper** - Peer-reviewed academic manuscript.
-3. **Series A Pitch Deck & Financial Memorandum** - Business traction and financial deck.
-4. **Scanned Clinical Lab Report** - Scanned diagnostic sheet demonstrating OCR capability.
+2. **AI Quantization Research Paper** - Peer-reviewed academic manuscript with equations and benchmarks.
+3. **Series A Pitch Deck & Financial Memorandum** - Business traction, SaaS metrics, and investment deck.
+4. **Scanned Clinical Lab Report** - Scanned diagnostic sheet demonstrating optical character recognition.
 
 ---
 
 ## 📂 Project Structure
 
 ```
-├── public/                  # Static assets & icons
+├── public/                  # Static assets & SVG icons
 ├── src/
 │   ├── components/          # Reusable UI components
-│   │   ├── ApiKeyModal.tsx      # Gemini API key management & test modal
 │   │   ├── DocumentChat.tsx     # Contextual document Q&A assistant
 │   │   ├── DocumentViewer.tsx   # Split-screen text viewer & search
 │   │   ├── FileUpload.tsx       # Drag-and-drop zone with progress bar
-│   │   ├── Navbar.tsx           # Brand header, theme & key status
+│   │   ├── Navbar.tsx           # Brand header & theme toggle
 │   │   ├── SummaryControls.tsx  # Length & focus mode selectors
 │   │   └── SummaryDisplay.tsx   # Smart summaries, suggestions, TTS & PDF export
 │   ├── data/
