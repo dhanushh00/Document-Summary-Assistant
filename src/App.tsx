@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   FileText,
-  Layers,
-  HelpCircle,
   MessageSquare,
-  ShieldCheck,
-  Zap,
-  ArrowRight,
   RefreshCw,
-  FolderOpen,
-  Eye,
-  CheckCircle2,
-  Cpu,
 } from 'lucide-react';
 import { Navbar } from './components/Navbar';
-import { ApiKeyModal } from './components/ApiKeyModal';
 import { FileUpload } from './components/FileUpload';
 import { DocumentViewer } from './components/DocumentViewer';
 import { SummaryControls } from './components/SummaryControls';
@@ -31,14 +21,9 @@ import {
 } from './types';
 import { extractTextFromPDF } from './services/pdfExtractor';
 import { extractTextFromImage } from './services/ocrExtractor';
-import {
-  generateSmartSummary,
-  getStoredApiKey,
-} from './services/summarizer';
+import { generateSmartSummary } from './services/summarizer';
 
 export function App() {
-  const [hasCustomKey, setHasCustomKey] = useState<boolean>(false);
-  const [isKeyModalOpen, setIsKeyModalOpen] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(true);
 
   // Document and extraction state
@@ -58,15 +43,6 @@ export function App() {
 
   // Right column view mode: 'summary' | 'chat'
   const [rightView, setRightView] = useState<'summary' | 'chat'>('summary');
-
-  useEffect(() => {
-    const key = getStoredApiKey();
-    setHasCustomKey(!!(key && key.trim().length > 10));
-  }, []);
-
-  const handleKeyUpdated = (key: string) => {
-    setHasCustomKey(!!(key && key.trim().length > 10));
-  };
 
   const handleToggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -210,8 +186,6 @@ export function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-brand-500 selection:text-white">
       {/* Top Navigation */}
       <Navbar
-        hasCustomKey={hasCustomKey}
-        onOpenKeyModal={() => setIsKeyModalOpen(true)}
         darkMode={darkMode}
         onToggleDarkMode={handleToggleDarkMode}
         onSelectSample={() => {
@@ -390,29 +364,15 @@ export function App() {
             <span>•</span>
             <span>Technical Assessment Project</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>Client-side PDF & Tesseract OCR</span>
+          <div className="flex items-center gap-3 text-slate-400 text-xs">
+            <span>Client-side PDF Parsing</span>
             <span>•</span>
-            <span>Google Gemini 1.5/2.0 AI</span>
+            <span>Tesseract OCR</span>
             <span>•</span>
-            <a
-              href="https://github.com/dhanushh00/Document-Summary-Assistant"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-400 hover:underline"
-            >
-              GitHub Repository
-            </a>
+            <span>Smart Summarizer</span>
           </div>
         </div>
       </footer>
-
-      {/* API Key Modal */}
-      <ApiKeyModal
-        isOpen={isKeyModalOpen}
-        onClose={() => setIsKeyModalOpen(false)}
-        onKeyUpdated={handleKeyUpdated}
-      />
     </div>
   );
 }
