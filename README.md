@@ -11,7 +11,7 @@
 
 **A high-performance, client-side document intelligence platform that extracts text from PDFs & scanned images, generates multi-tier smart summaries, extracts categorized key points, and provides actionable document improvement suggestions.**
 
-[Live Application](https://document-summary-assistant.vercel.app) • [GitHub Repository](https://github.com/dhanushh00/Document-Summary-Assistant) • [Approach Write-Up](#-technical-approach-write-up-200-words-max)
+[Live Application](https://document-summary-assistant-one-steel.vercel.app/) • [GitHub Repository](https://github.com/dhanushh00/Document-Summary-Assistant) • [Approach Write-Up](#-technical-approach-write-up-200-words-max)
 
 </div>
 
